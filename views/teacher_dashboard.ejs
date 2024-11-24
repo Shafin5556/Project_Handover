@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="/styles/teacher-dashboard.css">
+  <script>
+    let questionCount = 1;
+
+    function addQuestion() {
+      questionCount++;
+      const questionContainer = document.getElementById('questions-container');
+
+      const questionGroup = document.createElement('div');
+      questionGroup.className = 'question-group';
+      questionGroup.innerHTML = `
+        <h3>Question ${questionCount}</h3>
+        <label for="question_text_${questionCount}">Question:</label>
+        <textarea name="questions[${questionCount}][question_text]" required></textarea>
+
+        <label>Options:</label>
+        <div class="option">
+          <input type="text" name="questions[${questionCount}][options][]" placeholder="Option 1" required>
+          <input type="radio" name="questions[${questionCount}][correct_option]" value="0" required> Correct Answer
+        </div>
+        <div class="option">
+          <input type="text" name="questions[${questionCount}][options][]" placeholder="Option 2" required>
+          <input type="radio" name="questions[${questionCount}][correct_option]" value="1" required> Correct Answer
+        </div>
+        <div class="option">
+          <input type="text" name="questions[${questionCount}][options][]" placeholder="Option 3" required>
+          <input type="radio" name="questions[${questionCount}][correct_option]" value="2" required> Correct Answer
+        </div>
+        <div class="option">
+          <input type="text" name="questions[${questionCount}][options][]" placeholder="Option 4" required>
+          <input type="radio" name="questions[${questionCount}][correct_option]" value="3" required> Correct Answer
+        </div>
+      `;
+      questionContainer.appendChild(questionGroup);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Teacher Dashboard</h1>
+      <button class="view-questions-btn" onclick="window.location.href='/teacher/view-questions'">View Existing
+        Questions</button>
+
+      <!-- Logout Button -->
+      <form action="/logout" method="POST" class="logout-form">
+        <button type="submit" class="logout-btn">Logout</button>
+      </form>
+    </header>
+
+    <section class="create-questions-section">
+      <h2>Create Questions</h2>
+      <form action="/teacher/submit-questions" method="POST">
+        <div id="questions-container">
+          <div class="question-group">
+            <h3>Question 1</h3>
+            <label for="question_text_1">Question:</label>
+            <textarea name="questions[1][question_text]" required></textarea>
+
+            <label>Options:</label>
+            <div class="option">
+              <input type="text" name="questions[1][options][]" placeholder="Option 1" required>
+              <input type="radio" name="questions[1][correct_option]" value="0" required> Correct Answer
+            </div>
+            <div class="option">
+              <input type="text" name="questions[1][options][]" placeholder="Option 2" required>
+              <input type="radio" name="questions[1][correct_option]" value="1" required> Correct Answer
+            </div>
+            <div class="option">
+              <input type="text" name="questions[1][options][]" placeholder="Option 3" required>
+              <input type="radio" name="questions[1][correct_option]" value="2" required> Correct Answer
+            </div>
+            <div class="option">
+              <input type="text" name="questions[1][options][]" placeholder="Option 4" required>
+              <input type="radio" name="questions[1][correct_option]" value="3" required> Correct Answer
+            </div>
+          </div>
+        </div>
+        <button type="button" class="add-question-btn" onclick="addQuestion()">+ Add Another Question</button>
+        <button type="submit" class="submit-btn">Submit Questions</button>
+      </form>
+    </section>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Existing Questions</title>
+  <link rel="stylesheet" href="/styles/existing-questions.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Existing Questions</h1>
+      <button class="back-btn" onclick="window.location.href='/teacher/dashboard'">Back to Dashboard</button>
+    </header>
+
+    <ul class="questions-list">
+      <% questions.forEach(question => { %>
+        <li class="question-item">
+          <div class="question-content">
+            <strong><%= question.question_text %></strong>
+            <p>Options: <%= question.options.split(',').join(', ') %></p>
+          </div>
+          <form action="/teacher/delete-question/<%= question.id %>" method="POST">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>
